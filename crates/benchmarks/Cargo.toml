@@ -1,0 +1,33 @@
+[package]
+name = "benchmarks"
+
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dev-dependencies]
+# internal
+engine = { path = "../engine" }
+coach = { path = "../coach" }
+# external
+criterion = "0.5.1"
+# Use the same allocator as the `coach` crate
+mimalloc = { version = "*", default-features = false }
+
+[[bench]]
+name = "rollout_bench"
+harness = false
+[dependencies]
+rayon.workspace = true
+
+[[bench]]
+name = "position_bench"
+harness = false
+
+[[bench]]
+name = "move_generation_bench"
+harness = false
+
+[[bench]]
+name = "inputs_bench"
+harness = false
