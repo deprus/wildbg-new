@@ -169,25 +169,16 @@ impl Position {
 
     #[inline]
     pub fn sides_switched(&self) -> Position{
+        
         let mut pips = [0; 26];
-
-    // Leave the 0th and 25th index unchanged
-    pips[0] = self.pips[0];
-    pips[25] = self.pips[25];
-    
-    // Reverse and negate the rest of the indices
-    for i in 1..13 {
-        pips[i + 12] = -self.pips[i];
-    }
-    for i in 13..25 {
-        pips[i - 12] = -self.pips[i];
-    }
-    
-    Position {
-        x_off: self.o_off,
-        o_off: self.x_off,
-        pips,
-    }
+        for (i, pip) in self.pips.iter().enumerate() {
+            pips[25 - i] = -pip;
+        }
+        Position {
+            x_off: self.o_off,
+            o_off: self.x_off,
+            pips,
+        }
     }
 }
 
